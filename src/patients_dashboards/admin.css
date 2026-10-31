@@ -1,0 +1,147 @@
+:root {
+  --primary: #0f6fff;
+  --secondary: #12b8b0;
+  --dark: #1f2937;
+  --light: #f8fbff;
+}
+
+.admin-auth-page {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 20px;
+
+  background: linear-gradient(135deg, #f8fbff, #edf7ff);
+}
+
+.auth-background-circle {
+  position: absolute;
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.circle-one {
+  width: 350px;
+  height: 350px;
+
+  background: rgba(15, 111, 255, 0.08);
+
+  top: -120px;
+  left: -120px;
+}
+
+.circle-two {
+  width: 300px;
+  height: 300px;
+
+  background: rgba(18, 184, 176, 0.08);
+
+  bottom: -100px;
+  right: -100px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 520px;
+
+  background: rgba(255, 255, 255, 0.95);
+
+  backdrop-filter: blur(15px);
+
+  border-radius: 28px;
+
+  padding: 50px 40px;
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+
+  position: relative;
+  z-index: 2;
+}
+
+.auth-logo {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.auth-logo h2 {
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.auth-logo span {
+  color: #64748b;
+}
+
+.auth-content h1 {
+  font-size: 2.3rem;
+  text-align: center;
+  color: var(--dark);
+  margin-bottom: 15px;
+}
+
+.auth-content p {
+  text-align: center;
+  color: #64748b;
+  line-height: 1.8;
+}
+
+.google-auth-btn {
+  width: 100%;
+  margin-top: 35px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  padding: 15px;
+
+  border: none;
+  border-radius: 14px;
+
+  background: var(--primary);
+  color: white;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.google-auth-btn:hover {
+  transform: translateY(-2px);
+}
+
+.google-auth-btn img {
+  width: 22px;
+  height: 22px;
+}
+
+.auth-info {
+  margin-top: 25px;
+}
+
+.auth-info p {
+  margin-top: 8px;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 600px) {
+  .auth-card {
+    padding: 35px 25px;
+  }
+
+  .auth-content h1 {
+    font-size: 1.8rem;
+  }
+
+  .google-auth-btn {
+    font-size: 14px;
+  }
+}
