@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;
-  500;
+500;
   600;
   700&family=Manrope:wght@400;
   500;
@@ -10,7 +9,7 @@
   0, 700;
   1, 500;
   1, 600&display=swap');
-  :root {
+:root {
   --sh-ink:#142a3a;
   --sh-blue:#1d5b70;
   --sh-teal:#287f7b;
