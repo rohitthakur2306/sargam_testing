@@ -24,9 +24,28 @@ const BlogDetails = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-
+    setBlog(null);
+    setLoading(true);
     fetchBlog();
   }, [id]);
+
+  useEffect(() => {
+    if (!blog) return;
+    const previousTitle = document.title;
+    document.title = `${blog.title || "Health Insight"} | Sargam Healthcare`;
+    let description = document.querySelector('meta[name="description"]');
+    if (!description) {
+      description = document.createElement("meta");
+      description.name = "description";
+      document.head.appendChild(description);
+    }
+    const previousDescription = description.content;
+    description.content = blog.shortDescription || blog.title || "Health insights from Sargam Healthcare.";
+    return () => {
+      document.title = previousTitle;
+      description.content = previousDescription;
+    };
+  }, [blog]);
 
   const fetchBlog = async () => {
     try {
@@ -74,13 +93,12 @@ const BlogDetails = () => {
   const formatDate = (timestamp) => {
     if (!timestamp) return "Recently";
 
-    return timestamp
-      .toDate()
-      .toLocaleDateString("en-IN", {
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-      });
+    try {
+      const date = typeof timestamp.toDate === "function" ? timestamp.toDate() : new Date(timestamp);
+      return date.toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" });
+    } catch {
+      return "Recently";
+    }
   };
 
 
@@ -147,7 +165,7 @@ const BlogDetails = () => {
           </p>
 
           <Link
-            to="/blogs"
+            to="/Blog-page"
             className="blog-back-btn"
           >
             <span>←</span>
@@ -179,7 +197,7 @@ const BlogDetails = () => {
 
             <div className="article-breadcrumb">
 
-              <Link to="/blogs">
+              <Link to="/Blog-page">
                 Health Blogs
               </Link>
 

@@ -24,7 +24,6 @@ export default function WriteBlog() {
   // =====================================
   // Update Form Field
   // =====================================
-  console.log("ENV =", process.env);
   const update = (key, value) => {
     setForm((prev) => ({
       ...prev,
@@ -169,7 +168,7 @@ export default function WriteBlog() {
 
       alert("Blog Published Successfully!");
 
-      navigate("/blogs");
+      navigate("/Blog-page");
     } catch (error) {
       console.error(error);
       alert("Failed to publish blog.");

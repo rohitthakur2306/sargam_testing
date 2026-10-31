@@ -84,8 +84,8 @@ const Blog = () => {
 
   const [searchTerm, setSearchTerm] = useState("");
 
-  const [activeCategory, setActiveCategory] =
-    useState("All");
+  const [activeCategory, setActiveCategory] = useState("All");
+  const [visibleCount, setVisibleCount] = useState(9);
 
 
   /* =====================================================
@@ -172,6 +172,7 @@ const Blog = () => {
         blog.shortDescription,
         blog.category,
         blog.author,
+        ...(Array.isArray(blog.tags) ? blog.tags : [blog.tags || ""]),
       ]
         .filter(Boolean)
         .join(" ")
@@ -628,7 +629,7 @@ const Blog = () => {
 
             <div className="blog-grid-premium">
 
-              {gridBlogs.map(
+              {visibleGridBlogs.map(
                 (blog, index) => (
 
                   <article
@@ -725,6 +726,15 @@ const Blog = () => {
               )}
 
             </div>
+
+            {visibleCount < gridBlogs.length && (
+              <div className="blog-load-more-wrap">
+                <button type="button" className="blog-load-more" onClick={() => setVisibleCount((count) => count + 9)}>
+                  Load more articles <span aria-hidden="true">↓</span>
+                </button>
+                <small>Showing {Math.min(visibleCount, gridBlogs.length)} of {gridBlogs.length} articles</small>
+              </div>
+            )}
 
           ) : (
 

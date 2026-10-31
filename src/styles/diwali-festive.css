@@ -1,0 +1,131 @@
+.diwali-hero-decor {
+  position:absolute;
+  inset:0;
+  z-index:1;
+  overflow:hidden;
+  pointer-events:none
+}
+.diwali-string-light {
+  position:absolute;
+  top:0;
+  width:230px;
+  height:78px;
+  border-top:1px solid rgba(177, 135, 65, .45);
+  border-radius:0 0 50% 50%;
+  opacity:.85
+}
+.diwali-string-light:before {
+  content:"·  ✦  ·  ✦  ·  ✦  ·  ✦  ·  ✦";
+  position:absolute;
+  top:14px;
+  left:8px;
+  color:#c99e59;
+  font-size:18px;
+  letter-spacing:13px;
+  text-shadow:0 0 12px rgba(224, 171, 83, .42)
+}
+.light-one {
+  right:7%;
+  transform:rotate(3deg)
+}
+.light-two {
+  left:42%;
+  top:-28px;
+  transform:rotate(-5deg) scale(.72);
+  opacity:.55
+}
+.diwali-diya {
+  position:absolute;
+  bottom:9%;
+  width:56px;
+  height:23px;
+  border-radius:0 0 28px 28px;
+  background:linear-gradient(180deg, #e7bd79, #a96535);
+  box-shadow:0 10px 26px rgba(188, 119, 46, .18);
+  opacity:.8
+}
+.diwali-diya:before {
+  content:"";
+  position:absolute;
+  left:50%;
+  top:-18px;
+  width:13px;
+  height:22px;
+  transform:translateX(-50%);
+  border-radius:90% 10% 90% 10%;
+  background:radial-gradient(ellipse at 60% 70%, #fff6c5 0 18%, #f3bd55 42%, #df7b37 72%, transparent 74%);
+  filter:drop-shadow(0 0 9px rgba(241, 176, 74, .8))
+}
+.diwali-diya i {
+  position:absolute;
+  left:50%;
+  top:-5px;
+  width:32px;
+  height:10px;
+  transform:translateX(-50%);
+  border-radius:50%;
+  background:#f8dfad;
+  opacity:.9
+}
+.diya-one {
+  right:8%
+}
+.diya-two {
+  left:7%;
+  transform:scale(.72);
+  opacity:.5
+}
+.diwali-marigold {
+  position:absolute;
+  color:#d89a4e;
+  font-size:34px;
+  opacity:.34;
+  text-shadow:0 3px 10px rgba(180, 117, 49, .18)
+}
+.marigold-one {
+  top:20%;
+  right:4%
+}
+.marigold-two {
+  bottom:18%;
+  left:45%;
+  font-size:23px;
+  opacity:.22
+}
+.diwali-festive-note {
+  position:absolute;
+  right:7%;
+  bottom:4%;
+  color:#a47b43;
+  font-family:'Playfair Display', serif;
+  font-size:12px;
+  font-style:italic;
+  letter-spacing:.04em;
+  opacity:.78
+}
+.premium-hero-container {
+  z-index:2
+}
+@media(max-width:640px) {
+  .diwali-string-light {
+  transform:scale(.65);
+  transform-origin:top right;
+  right:-5%
+}
+.light-two, .diya-two, .marigold-two {
+  display:none
+}
+.diwali-diya {
+  bottom:3%;
+  transform:scale(.65)
+}
+.diwali-festive-note {
+  right:18px;
+  bottom:1.5%;
+  font-size:10px
+}
+.diwali-marigold {
+  font-size:22px
+}
+
+}
