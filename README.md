@@ -1,70 +1,26 @@
-# Getting Started with Create React App
+# Sargam Healthcare — Complete rebuild
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Modular React + Firebase website and staff portal. Preserves existing Firestore collections and key fields: blogs, patients, patient_tracking. Retains the existing Google Forms, Cloudinary unsigned image uploads and doctor/brand assets. This is a separate rebuild branch; main is unchanged.
 
-## Available Scripts
+## Setup
+1. Use Node.js 20 LTS and npm.
+2. Clone or download this branch and run npm install.
+3. Copy .env.example to .env and fill the Firebase web-app configuration.
+4. Set REACT_APP_ADMIN_EMAILS to comma-separated authorised staff Google account emails.
+5. Configure Cloudinary cloud name and unsigned upload preset for CMS images.
+6. Run npm start; run npm run build for production output.
 
-In the project directory, you can run:
+## Included modules
+- Public website: home, about, doctor directory and six doctor profiles, appointment request, contact, health journal listing and article pages.
+- Appointment and contact requests use the existing Google Forms. A request is not an appointment confirmation.
+- Staff-only blog CMS; cover and gallery images upload to Cloudinary; posts are stored in the existing blogs collection.
+- Staff portal: Google sign-in and email allow-list, live patient dashboard, admission, transactional discharge to patient_tracking, paginated patient history.
+- Responsive layouts, shared components and plain CSS. No Tailwind.
 
-### `npm start`
+## Security before production
+The client-side email allow-list is a UI gate, not a substitute for Firestore Security Rules. Apply and review firestore.rules before handling real patient data. Never put service-account credentials in the browser. The previous repository tracked a local .env; rotate credentials that may have been committed and keep local env files untracked.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Data compatibility and limits
+Existing collection names and key fields are retained. Discharge moves the patient to history and removes the active record in one Firestore transaction. History loads 20 records at a time. Search/date filters apply to loaded records; exhaustive large-dataset search should be implemented with indexed server-side filters. No live patient records are bundled.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Verify Firestore rules, indexes, staff allow-list, Cloudinary preset and form ownership before production deployment. External integrations require valid configuration.
