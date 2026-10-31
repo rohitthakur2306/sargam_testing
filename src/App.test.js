@@ -1,8 +1,6 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
-
-test('renders learn react link', () => {
+import { render, screen } from "@testing-library/react";
+import App from "./App";
+test("renders the Sargam Healthcare home page", () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  expect(screen.getByRole("heading", { name: /Care that listens/i })).toBeInTheDocument();
 });
