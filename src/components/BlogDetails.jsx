@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 
@@ -21,6 +21,28 @@ const BlogDetails = () => {
   /* =====================================================
      FETCH BLOG
   ===================================================== */
+
+  const fetchBlog = useCallback(async () => {
+    try {
+      const blogRef = doc(db, "blogs", id);
+
+      const snapshot = await getDoc(blogRef);
+
+      if (snapshot.exists()) {
+        setBlog({
+          id: snapshot.id,
+          ...snapshot.data(),
+        });
+      } else {
+        setBlog(null);
+      }
+    } catch (error) {
+      console.error(error);
+      setBlog(null);
+    } finally {
+      setLoading(false);
+    }
+  }, [fetchBlog]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -46,29 +68,6 @@ const BlogDetails = () => {
       description.content = previousDescription;
     };
   }, [blog]);
-
-  const fetchBlog = async () => {
-    try {
-      const blogRef = doc(db, "blogs", id);
-
-      const snapshot = await getDoc(blogRef);
-
-      if (snapshot.exists()) {
-        setBlog({
-          id: snapshot.id,
-          ...snapshot.data(),
-        });
-      } else {
-        setBlog(null);
-      }
-    } catch (error) {
-      console.error(error);
-      setBlog(null);
-    } finally {
-      setLoading(false);
-    }
-  };
-
 
   /* =====================================================
      READ TIME
