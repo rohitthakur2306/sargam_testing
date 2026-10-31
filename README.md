@@ -18,7 +18,7 @@ Modular React + Firebase website and staff portal. Preserves existing Firestore 
 - Responsive layouts, shared components and plain CSS. No Tailwind.
 
 ## Security before production
-The client-side email allow-list is a UI gate, not a substitute for Firestore Security Rules. Apply and review firestore.rules before handling real patient data. Never put service-account credentials in the browser. The previous repository tracked a local .env; rotate credentials that may have been committed and keep local env files untracked.
+The client-side email allow-list is a UI gate, not a substitute for Firestore Security Rules. Apply and review firestore.rules before handling real patient data. The supplied rules require a trusted Firebase custom claim named staff with value true; set this claim only from a trusted Admin SDK environment after verifying staff identity. The browser allow-list alone does not grant Firestore access. Never put service-account credentials in the browser. The previous repository tracked a local .env; rotate credentials that may have been committed and keep local env files untracked.
 
 ## Data compatibility and limits
 Existing collection names and key fields are retained. Discharge moves the patient to history and removes the active record in one Firestore transaction. History loads 20 records at a time. Search/date filters apply to loaded records; exhaustive large-dataset search should be implemented with indexed server-side filters. No live patient records are bundled.
