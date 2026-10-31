@@ -2,7 +2,6 @@ import doctorImage from "../../assests/NeerajJha.png";
 import Navbar from "../landingpage/Navbar";
 import Footer from "../landingpage/Footer";
 import "../Doctorsprofile/Doctors.css";
-import useScrollReveal from "../../hooks/useScrollReveal";
 
 export default function DrNeerajJhaProfile() {
   return (
