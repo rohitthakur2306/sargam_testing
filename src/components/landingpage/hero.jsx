@@ -16,6 +16,15 @@ export default function Hero() {
       <div className="premium-hero-grid" />
       <div className="premium-hero-glow premium-hero-glow-one" />
       <div className="premium-hero-glow premium-hero-glow-two" />
+      <div className="diwali-hero-decor" aria-hidden="true">
+        <span className="diwali-string-light light-one" />
+        <span className="diwali-string-light light-two" />
+        <span className="diwali-diya diya-one"><i /></span>
+        <span className="diwali-diya diya-two"><i /></span>
+        <span className="diwali-marigold marigold-one">✺</span>
+        <span className="diwali-marigold marigold-two">✺</span>
+        <span className="diwali-festive-note">A season of light, hope &amp; healing</span>
+      </div>
 
 
       {/* =====================================================

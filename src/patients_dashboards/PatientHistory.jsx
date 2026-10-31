@@ -29,6 +29,8 @@ export default function PatientHistory() {
   const [fromDate, setFromDate] = useState("");
 
   const [toDate, setToDate] = useState("");
+  const [hasMore, setHasMore] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
 
   useEffect(() => {
     loadPatients();
@@ -53,7 +55,8 @@ export default function PatientHistory() {
 
       setPatients(data);
 
-      setLastDoc(snapshot.docs[snapshot.docs.length - 1]);
+      setLastDoc(snapshot.docs[snapshot.docs.length - 1] || null);
+      setHasMore(snapshot.docs.length === 20);
     } catch (error) {
       console.log(error);
     }
@@ -62,6 +65,8 @@ export default function PatientHistory() {
   };
 
   const loadMore = async () => {
+    if (!lastDoc || !hasMore || loadingMore) return;
+    setLoadingMore(true);
     try {
       const q = query(
         collection(db, "patient_tracking"),
@@ -69,19 +74,15 @@ export default function PatientHistory() {
         startAfter(lastDoc),
         limit(20),
       );
-
       const snapshot = await getDocs(q);
-
-      const data = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-
-      setPatients([...patients, ...data]);
-
-      setLastDoc(snapshot.docs[snapshot.docs.length - 1]);
+      const data = snapshot.docs.map((item) => ({ id: item.id, ...item.data() }));
+      setPatients((current) => [...current, ...data]);
+      setLastDoc(snapshot.docs[snapshot.docs.length - 1] || lastDoc);
+      setHasMore(snapshot.docs.length === 20);
     } catch (error) {
-      console.log(error);
+      console.error("Unable to load more patient records:", error);
+    } finally {
+      setLoadingMore(false);
     }
   };
 
@@ -89,12 +90,13 @@ export default function PatientHistory() {
     const matchesSearch =
       patient.patientName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       patient.phone?.includes(searchTerm);
-
-    if (!matchesSearch) {
-      return false;
-    }
-
-    return true;
+    const date = patient.dischargedAt?.toDate?.() || patient.createdAt?.toDate?.() || null;
+    const matchesMonth = !monthFilter || (date && String(date.getMonth()) === monthFilter);
+    const start = fromDate ? new Date(`${fromDate}T00:00:00`) : null;
+    const end = toDate ? new Date(`${toDate}T23:59:59.999`) : null;
+    const matchesFrom = !start || (date && date >= start);
+    const matchesTo = !end || (date && date <= end);
+    return Boolean(matchesSearch && matchesMonth && matchesFrom && matchesTo);
   });
 
   return (
@@ -200,8 +202,8 @@ export default function PatientHistory() {
               </div>
             </div>
           ))}
-          <button className="load-more-btn" onClick={loadMore}>
-            Load More
+          <button className="load-more-btn" onClick={loadMore} disabled={!hasMore || loadingMore}>
+            {loadingMore ? "Loading..." : hasMore ? "Load More" : "All Records Loaded"}
           </button>
         </div>
 

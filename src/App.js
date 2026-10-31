@@ -1,4 +1,6 @@
 import "./App.css";
+import "./styles/premium-hospital.css";
+import "./styles/diwali-festive.css";
 
 import Home from "./components/mainpage";
 import AdminLogin from "./patients_dashboards/mainpage";
@@ -12,7 +14,7 @@ import Amitbeniwalprofile from "./components/Doctorsprofile/amitbeniwal";
 import RkmishraProfile from "./components/Doctorsprofile/Rkmishra";
 import BachunarayanProfile from "./components/Doctorsprofile/Bachunarayan";
 // import { useNavigate } from "react-router-dom";
-// import scrrollToTop from "./hooks/ScrollToTop";
+import ScrollToTop from "./components/common/ScrollToTop";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import About from "./components/About";
 import WriteBlog from "./CMS/Blog/Blogpage";
@@ -28,7 +30,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 function App() {
   return (
     <Router>
-      <scrrollToTop />
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
         {/* Admin login route start */}
@@ -74,6 +76,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/book-appointment" element={<BookAppointment />} />
         <Route path="/Blog-page" element={<Blog />} />
+        <Route path="/blogs" element={<Blog />} />
         <Route path="/blogs/:id" element={<BlogDetails />} />
 
         <Route
