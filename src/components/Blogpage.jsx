@@ -217,6 +217,12 @@ const Blog = () => {
   ]);
 
 
+  useEffect(() => {
+    setVisibleCount(9);
+  }, [searchTerm, activeCategory]);
+
+  const visibleGridBlogs = gridBlogs.slice(0, visibleCount);
+
   /* =====================================================
      LOADING
   ===================================================== */
