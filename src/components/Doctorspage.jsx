@@ -13,13 +13,7 @@ import doctor5 from "../assests/AmitBeniwal.png";
 import doctor6 from "../assests/rkmishra.png";
 import doctor7 from "../assests/bacchu-sir-img.png";
 
-export default function Doctors() {
-  const navigate = useNavigate();
-
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedDepartment, setSelectedDepartment] = useState("All");
-
-  const doctors = [
+const doctors = [
     {
       id: "dr-rohit-kumar-tiwari",
       name: "Dr. Rohit Kumar Tiwari",
@@ -106,6 +100,14 @@ export default function Doctors() {
       featured: false,
     },
   ];
+
+export default function Doctors() {
+  const navigate = useNavigate();
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedDepartment, setSelectedDepartment] = useState("All");
+
+
 
   const departments = [
     "All",
