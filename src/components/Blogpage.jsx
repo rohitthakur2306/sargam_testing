@@ -627,6 +627,7 @@ const Blog = () => {
 
           {gridBlogs.length > 0 ? (
 
+            <>
             <div className="blog-grid-premium">
 
               {visibleGridBlogs.map(
@@ -735,6 +736,7 @@ const Blog = () => {
                 <small>Showing {Math.min(visibleCount, gridBlogs.length)} of {gridBlogs.length} articles</small>
               </div>
             )}
+            </>
 
           ) : (
 
